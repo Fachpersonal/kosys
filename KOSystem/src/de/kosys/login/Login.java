@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 //import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
@@ -87,8 +88,8 @@ public class Login extends JFrame{
 //				if(login(username, password)) {
 //				}
 				
-//				JOptionPane.showMessageDialog(null, username);		// Shows given username
-//				JOptionPane.showMessageDialog(null, password);		// Shows given password
+				JOptionPane.showMessageDialog(null, username);		// Shows given username
+				JOptionPane.showMessageDialog(null, password);		// Shows given password
 			}
 		});
 		loginbtn.setBounds(477, 341, 89, 23);
@@ -101,16 +102,30 @@ public class Login extends JFrame{
 	private void login(String username, String password) {
 		//TODO connect to database and check if everything is all right!
 		try	{
-			String url = "jdbc:mysql://92.168.1.2:3306/users";
+			String url = "jdbc:mysql://localhost:3306/kosys";
 			// Connect to database
-			Connection myConn = DriverManager.getConnection(url);
+			Connection myConn = DriverManager.getConnection(url, "root", "");
 			// Create statement
 			Statement myStmt = myConn.createStatement();
 			// Execute SQL query
 			ResultSet myRs = myStmt.executeQuery("SELECT * FROM `register` ORDER BY `id` ASC");
 			// Process result set
-			while(myRs.next()) {
-				System.out.println(myRs.getInt("id") + ", " + myRs.getString("username") + ", " + myRs.getString("password") + ", " + myRs.getString("email") + ", " + myRs.getInt("power"));
+//			while(myRs.next()) {
+//				System.out.println(myRs.getInt("id") + ", " + myRs.getString("username") + ", " + myRs.getString("password") + ", " + myRs.getString("email") + ", " + myRs.getInt("power"));
+//			}
+			while(myRs.next()) {				
+				if(username.equals(myRs.getString("username"))) {
+					if(password.equals(myRs.getString("password"))) {
+						System.out.println("YUHU U LOGGED IN");
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Wrong Password");
+						System.exit(0);
+					}
+				}
+				else {
+					System.out.println("Next");
+				}
 			}
 		}
 		catch(Exception e) {
