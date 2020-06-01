@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -23,6 +24,9 @@ public class Login extends JFrame{
 	
 	private JPasswordField passwordField;
 	private JTextField usernameField;
+	
+	private String username;
+	private String password;
 
 	public Login() {
 		getContentPane().setBackground(Color.GRAY);
@@ -73,8 +77,24 @@ public class Login extends JFrame{
 		closebtn.setBounds(726, 0, 74, 26);
 		top.add(closebtn);
 		
+		JButton loginbtn = new JButton("Login");
+		loginbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				username = usernameField.getText();
+				password = new String(passwordField.getPassword());
+//				login(username, password);
+				JOptionPane.showMessageDialog(null, username);
+				JOptionPane.showMessageDialog(null, password);
+			}
+		});
+		loginbtn.setBounds(477, 341, 89, 23);
+		getContentPane().add(loginbtn);
 		
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
+	
+//	private void login(String username, char[] password) {
+//		//TODO connect to database and check if everything is all right!
+//	}
 }
