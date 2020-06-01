@@ -7,9 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.SwingConstants;
 import java.awt.SystemColor;
 
 public class Window extends JFrame {
@@ -52,7 +50,7 @@ public class Window extends JFrame {
 		JButton page1 = new JButton("TODO");
 		page1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				selectPage(1);
 			}
 		});
 		page1.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -65,7 +63,7 @@ public class Window extends JFrame {
 		JButton page2 = new JButton("CHAT");
 		page2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				selectPage(2);
 			}
 		});
 		page2.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -78,7 +76,7 @@ public class Window extends JFrame {
 		JButton page3 = new JButton("USER");
 		page3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				selectPage(3);
 			}
 		});
 		page3.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -91,7 +89,7 @@ public class Window extends JFrame {
 		JButton page4 = new JButton("SETTINGS");
 		page4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				selectPage(4);
 			}
 		});
 		page4.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -107,30 +105,23 @@ public class Window extends JFrame {
 		getContentPane().add(mainPanel);
 		mainPanel.setLayout(null);
 		
-		JPanel todoPanel = new JPanel();
-		todoPanel.setBounds(10, 10, 540, 400);
-		todoPanel.setVisible(false);
-		mainPanel.add(todoPanel);
-		todoPanel.setLayout(null);
-		
-		JPanel chatPanel = new JPanel();
-		chatPanel.setBounds(10, 10, 540, 400);
-		chatPanel.setVisible(false);
-		mainPanel.add(chatPanel);
-		chatPanel.setLayout(null);
-		
-		JPanel userPanel = new JPanel();
-		userPanel.setBounds(10, 10, 540, 400);
-		userPanel.setVisible(false);
-		mainPanel.add(userPanel);
-		userPanel.setLayout(null);
-		
-		JPanel settingsPanel = new JPanel();
-		settingsPanel.setBounds(10, 10, 540, 400);
-		settingsPanel.setVisible(false);
-		mainPanel.add(settingsPanel);
-		settingsPanel.setLayout(null);
-		
 		setVisible(true);
+	}
+	
+	private void selectPage(int page) {
+		switch(page) {
+		case 1:	//TODOPAGE
+			
+			break;
+		case 2:	//CHATPAGE
+			
+			break;
+		case 3:	//USERPAGE
+			
+			break;
+		case 4:	//SETTINGSPAGE
+			
+			break;
+		}
 	}
 }
