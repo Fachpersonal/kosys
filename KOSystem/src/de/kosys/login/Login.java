@@ -85,11 +85,12 @@ public class Login extends JFrame{
 				password = new String(passwordField.getPassword());
 				login(username, password);
 				
-//				if(login(username, password)) {
-//				}
+				if(login(username, password)) {
+					
+				}
 				
-				JOptionPane.showMessageDialog(null, username);		// Shows given username
-				JOptionPane.showMessageDialog(null, password);		// Shows given password
+//				JOptionPane.showMessageDialog(null, username);		// Shows given username
+//				JOptionPane.showMessageDialog(null, password);		// Shows given password
 			}
 		});
 		loginbtn.setBounds(477, 341, 89, 23);
@@ -99,7 +100,7 @@ public class Login extends JFrame{
 		setVisible(true);
 	}
 	
-	private void login(String username, String password) {
+	private boolean login(String username, String password) {
 		//TODO connect to database and check if everything is all right!
 		try	{
 			String url = "jdbc:mysql://localhost:3306/kosys";
@@ -116,20 +117,23 @@ public class Login extends JFrame{
 			while(myRs.next()) {				
 				if(username.equals(myRs.getString("username"))) {
 					if(password.equals(myRs.getString("password"))) {
-						System.out.println("YUHU U LOGGED IN");
+//						System.out.println("YUHU U LOGGED IN");
+						return true;
 					}
 					else {
 						JOptionPane.showMessageDialog(null, "Wrong Password");
 						System.exit(0);
 					}
 				}
-				else {
-					System.out.println("Next");
-				}
+//				else {
+//					System.out.println("Next");
+// 				}
 			}
+			JOptionPane.showMessageDialog(null, "Account does not exist!");
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
+		return false;
 	}
 }
