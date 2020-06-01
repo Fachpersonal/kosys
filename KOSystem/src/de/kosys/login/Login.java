@@ -1,7 +1,6 @@
 package de.kosys.login;
 
 import java.awt.Color;
-//import java.awt.Graphics;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,10 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+//import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import java.sql.*;
 
 public class Login extends JFrame{
 	
@@ -82,9 +82,13 @@ public class Login extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				username = usernameField.getText();
 				password = new String(passwordField.getPassword());
-//				login(username, password);
-				JOptionPane.showMessageDialog(null, username);
-				JOptionPane.showMessageDialog(null, password);
+				login(username, password);
+				
+//				if(login(username, password)) {
+//				}
+				
+//				JOptionPane.showMessageDialog(null, username);		// Shows given username
+//				JOptionPane.showMessageDialog(null, password);		// Shows given password
 			}
 		});
 		loginbtn.setBounds(477, 341, 89, 23);
@@ -94,7 +98,23 @@ public class Login extends JFrame{
 		setVisible(true);
 	}
 	
-//	private void login(String username, char[] password) {
-//		//TODO connect to database and check if everything is all right!
-//	}
+	private void login(String username, String password) {
+		//TODO connect to database and check if everything is all right!
+		try	{
+			String url = "jdbc:mysql://92.168.1.2:3306/users";
+			// Connect to database
+			Connection myConn = DriverManager.getConnection(url);
+			// Create statement
+			Statement myStmt = myConn.createStatement();
+			// Execute SQL query
+			ResultSet myRs = myStmt.executeQuery("SELECT * FROM `register` ORDER BY `id` ASC");
+			// Process result set
+			while(myRs.next()) {
+				System.out.println(myRs.getInt("id") + ", " + myRs.getString("username") + ", " + myRs.getString("password") + ", " + myRs.getString("email") + ", " + myRs.getInt("power"));
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
