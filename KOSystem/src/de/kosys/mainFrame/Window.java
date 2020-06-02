@@ -1,12 +1,15 @@
 package de.kosys.mainFrame;
 
-import java.awt.Color;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+
+import de.kosys.todo.ToDoLable;
+
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
 
@@ -109,9 +112,10 @@ public class Window extends JFrame {
 	}
 	
 	private void selectPage(int page) {
+		ToDoLable tdc = new ToDoLable();
 		switch(page) {
 		case 1:	//TODOPAGE
-			
+			tdc.makeToDo();
 			break;
 		case 2:	//CHATPAGE
 			

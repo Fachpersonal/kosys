@@ -12,6 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 //import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+
+import de.kosys.mainFrame.Window;
+
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import java.sql.*;
@@ -83,10 +86,9 @@ public class Login extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				username = usernameField.getText();
 				password = new String(passwordField.getPassword());
-				login(username, password);
-				
 				if(login(username, password)) {
-					
+					dispose();
+					new Window();
 				}
 				
 //				JOptionPane.showMessageDialog(null, username);		// Shows given username
@@ -132,7 +134,8 @@ public class Login extends JFrame{
 			JOptionPane.showMessageDialog(null, "Account does not exist!");
 		}
 		catch(Exception e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Cannot connect to Database!");
+			System.exit(0);
 		}
 		return false;
 	}
