@@ -111,7 +111,7 @@ public class Login extends JFrame{
 			// Create statement
 			Statement myStmt = myConn.createStatement();
 			// Execute SQL query
-			ResultSet myRs = myStmt.executeQuery("SELECT * FROM `register` ORDER BY `id` ASC");
+			ResultSet myRs = myStmt.executeQuery("SELECT * FROM `register`");
 			// Process result set
 //			while(myRs.next()) {
 //				System.out.println(myRs.getInt("id") + ", " + myRs.getString("username") + ", " + myRs.getString("password") + ", " + myRs.getString("email") + ", " + myRs.getInt("power"));
@@ -135,7 +135,8 @@ public class Login extends JFrame{
 		}
 		catch(Exception e) {
 			JOptionPane.showMessageDialog(null, "Cannot connect to Database!");
-			System.exit(0);
+			e.printStackTrace();
+//			System.exit(0);
 		}
 		return false;
 	}

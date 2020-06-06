@@ -1,7 +1,11 @@
 package de.kosys.mainFrame;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import de.kosys.todo.ToDo;
+
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
@@ -9,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
+import javax.swing.JLayeredPane;
 
 public class Window extends JFrame {
 	
@@ -16,6 +21,8 @@ public class Window extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	ToDo todo = new ToDo();
 	
 	public Window() {
 		setSize(800,450);
@@ -47,10 +54,32 @@ public class Window extends JFrame {
 		getContentPane().add(sidePanel);
 		sidePanel.setLayout(null);
 		
+		JLayeredPane layeredPane = new JLayeredPane();
+		layeredPane.setBounds(240, 30, 560, 420);
+		getContentPane().add(layeredPane);
+		
+		JPanel todoPanel = new JPanel();
+		todoPanel.setBounds(0, 0, 560, 420);
+		layeredPane.add(todoPanel);
+		todoPanel.setLayout(null);
+		
+		JPanel chatPanel = new JPanel();
+		chatPanel.setBounds(0, 0, 560, 420);
+		layeredPane.add(chatPanel);
+		
+		JPanel userPanel = new JPanel();
+		userPanel.setBounds(0, 0, 560, 420);
+		layeredPane.add(userPanel);
+		
+		JPanel settingsPanel = new JPanel();
+		settingsPanel.setBounds(0, 0, 560, 420);
+		layeredPane.add(settingsPanel);
+		
+		
 		JButton page1 = new JButton("TODO");
 		page1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				selectPage(1);
+				selectPage(todoPanel);
 			}
 		});
 		page1.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -63,7 +92,7 @@ public class Window extends JFrame {
 		JButton page2 = new JButton("CHAT");
 		page2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				selectPage(2);
+				selectPage(chatPanel);
 			}
 		});
 		page2.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -76,7 +105,7 @@ public class Window extends JFrame {
 		JButton page3 = new JButton("USER");
 		page3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				selectPage(3);
+				selectPage(userPanel);
 			}
 		});
 		page3.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -89,7 +118,7 @@ public class Window extends JFrame {
 		JButton page4 = new JButton("SETTINGS");
 		page4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				selectPage(4);
+				selectPage(settingsPanel);
 			}
 		});
 		page4.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -99,30 +128,29 @@ public class Window extends JFrame {
 		page4.setBounds(0, 190, 240, 50);
 		sidePanel.add(page4);
 		
-		JPanel mainPanel = new JPanel();
-		mainPanel.setBounds(240, 30, 560, 420);
-		mainPanel.setBackground(Color.LIGHT_GRAY);
-		getContentPane().add(mainPanel);
-		mainPanel.setLayout(null);
-		
 		setVisible(true);
 	}
 	
-	private void selectPage(int page) {
-//		ToDoLable tdc = new ToDoLable();
-		switch(page) {
-		case 1:	//TODOPAGE
-//			tdc.makeToDo();
-			break;
-		case 2:	//CHATPAGE
-			
-			break;
-		case 3:	//USERPAGE
-			
-			break;
-		case 4:	//SETTINGSPAGE
-			
-			break;
-		}
+	private void selectPage(JPanel panel) {
+		getLayeredPane().removeAll();
+		getLayeredPane().add(panel);
+		getLayeredPane().repaint();
+		getLayeredPane().revalidate();
+	}
+	
+	private void createToDoLabels() {
+		int x = 0;
+		int y = 0;
+		
+		int wm = 5; // Width margin
+		int hm = 10; // Height margin
+		
+//		for(int i = 0; i < todo.getmaxID(); i++) {
+//			JPanel Task = new JPanel();
+//			Task.setBounds(x, y, 130, 190);
+//			todoPanel.add(Task);
+//		}
+//		
+		
 	}
 }
