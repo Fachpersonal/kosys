@@ -22,6 +22,11 @@ public class Window extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private JPanel todoPanel;
+	private JPanel userPanel;
+	private JPanel chatPanel;
+	private JPanel settingsPanel;
+	
 	ToDo todo = new ToDo();
 	
 	public Window() {
@@ -58,23 +63,25 @@ public class Window extends JFrame {
 		layeredPane.setBounds(240, 30, 560, 420);
 		getContentPane().add(layeredPane);
 		
-		JPanel todoPanel = new JPanel();
-		todoPanel.setBounds(0, 0, 560, 420);
+		todoPanel = new JPanel();
+		todoPanel.setBounds(240, 30, 560, 420);
 		layeredPane.add(todoPanel);
 		todoPanel.setLayout(null);
 		
-		JPanel chatPanel = new JPanel();
-		chatPanel.setBounds(0, 0, 560, 420);
+		chatPanel = new JPanel();
+		chatPanel.setBounds(240, 30, 560, 420);
 		layeredPane.add(chatPanel);
+		chatPanel.setLayout(null);
 		
-		JPanel userPanel = new JPanel();
-		userPanel.setBounds(0, 0, 560, 420);
+		userPanel = new JPanel();
+		userPanel.setBounds(240, 30, 560, 420);
 		layeredPane.add(userPanel);
+		userPanel.setLayout(null);
 		
-		JPanel settingsPanel = new JPanel();
-		settingsPanel.setBounds(0, 0, 560, 420);
+		settingsPanel = new JPanel();
+		settingsPanel.setBounds(240, 30, 560, 420);
 		layeredPane.add(settingsPanel);
-		
+		settingsPanel.setLayout(null);
 		
 		JButton page1 = new JButton("TODO");
 		page1.addActionListener(new ActionListener() {
@@ -127,12 +134,12 @@ public class Window extends JFrame {
 		page4.setBackground(SystemColor.controlShadow);
 		page4.setBounds(0, 190, 240, 50);
 		sidePanel.add(page4);
-		
+			
 		setVisible(true);
 	}
 	
 	private void selectPage(JPanel panel) {
-		getLayeredPane().removeAll();
+		getLayeredPane().remove(todoPanel);
 		getLayeredPane().add(panel);
 		getLayeredPane().repaint();
 		getLayeredPane().revalidate();

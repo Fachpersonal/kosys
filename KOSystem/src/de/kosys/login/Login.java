@@ -137,7 +137,6 @@ public class Login extends JFrame{
 //					System.out.println("Next");
 //					JOptionPane.showMessageDialog(null, "Account does not exist!");
 // 				}
-				return false;
 			}
 		}
 		catch(Exception e) {
