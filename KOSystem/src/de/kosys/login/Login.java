@@ -86,9 +86,15 @@ public class Login extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				username = usernameField.getText();
 				password = new String(passwordField.getPassword());
-				if(login(username, password)) {
-					dispose();
-					new Window();
+				
+				boolean logged = false;
+				
+				while(!logged) {
+					if(login(username, password)) {
+						dispose();
+						logged = true;
+						new Window();
+					}
 				}
 				
 //				JOptionPane.showMessageDialog(null, username);		// Shows given username
@@ -105,7 +111,7 @@ public class Login extends JFrame{
 	private boolean login(String username, String password) {
 		//TODO connect to database and check if everything is all right!
 		try	{
-			String url = "jdbc:mysql://localhost:3306/kosys";
+			String url = "jdbc:mysql://localhost/kosys?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 			// Connect to database
 			Connection myConn = DriverManager.getConnection(url, "root", "");
 			// Create statement
@@ -124,20 +130,22 @@ public class Login extends JFrame{
 					}
 					else {
 						JOptionPane.showMessageDialog(null, "Wrong Password");
-						System.exit(0);
+						return false;
 					}
 				}
 //				else {
 //					System.out.println("Next");
+//					JOptionPane.showMessageDialog(null, "Account does not exist!");
 // 				}
+				return false;
 			}
-			JOptionPane.showMessageDialog(null, "Account does not exist!");
 		}
 		catch(Exception e) {
 			JOptionPane.showMessageDialog(null, "Cannot connect to Database!");
 			e.printStackTrace();
-//			System.exit(0);
+			System.exit(0);
 		}
+		JOptionPane.showMessageDialog(null, "Account does not exist!");
 		return false;
 	}
 }
