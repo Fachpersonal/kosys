@@ -9,6 +9,7 @@ import de.kosys.todo.ToDo;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
@@ -86,7 +87,10 @@ public class Window extends JFrame {
 		JButton page1 = new JButton("TODO");
 		page1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				todo.getToDoList();
+				createToDoLabels();
 				selectPage(todoPanel);
+				System.out.println(todo.getmaxID());
 			}
 		});
 		page1.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -140,24 +144,59 @@ public class Window extends JFrame {
 	
 	private void selectPage(JPanel panel) {
 		getLayeredPane().remove(todoPanel);
+		getLayeredPane().remove(chatPanel);
+		getLayeredPane().remove(userPanel);	
+		getLayeredPane().remove(settingsPanel);
 		getLayeredPane().add(panel);
 		getLayeredPane().repaint();
 		getLayeredPane().revalidate();
 	}
 	
 	private void createToDoLabels() {
+		
+		JButton[] arr = new JButton[todo.getmaxID()];
+		
 		int x = 0;
 		int y = 0;
 		
+		int placeholder = 0;
+		
+		int witdh = 176;
+		int height = 95;
+		
 		int wm = 5; // Width margin
 		int hm = 10; // Height margin
-		
-//		for(int i = 0; i < todo.getmaxID(); i++) {
-//			JPanel Task = new JPanel();
-//			Task.setBounds(x, y, 130, 190);
-//			todoPanel.add(Task);
-//		}
-//		
-		
+	
+		for(int i = 0; i < todo.getmaxID(); i++) {
+			
+			arr[i] = new JButton(todo.getTitle(i));
+			arr[i].setBounds(wm + x, hm + y, witdh, height);
+			arr[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+				}
+			});
+			switch(todo.getStatus(i)) {
+			case "ToDo":
+				arr[i].setBackground(Color.RED);	// TODO Change COLOR!!!
+				break;
+			case "In Work":
+				arr[i].setBackground(Color.YELLOW);		// TODO Change COLOR!!!
+				break;
+			case "Done":
+				arr[i].setBackground(Color.GREEN);		// TODO Change COLOR!!!
+				break;
+			}
+			
+			todoPanel.add(arr[i]);
+			
+			placeholder++;
+			x += 186;
+			if(placeholder == 3) {
+				y += 105;
+				x = 0;
+				placeholder = 0;
+			}
+		}
 	}
 }

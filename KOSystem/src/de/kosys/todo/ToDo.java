@@ -1,6 +1,5 @@
 package de.kosys.todo;
 
-import javax.swing.JPanel;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -8,14 +7,15 @@ import java.sql.Statement;
 
 public class ToDo{
 	
-	private int maxId = 0;
+	private int maxId;
 	
-	private int[] id;
+	private int[] id = new int[16];
 	
-	private String[] Title;
-	private String[] Status;
+	private String[] Title = new String[16];
+	private String[] Status = new String[16];
 		
 	public void getToDoList() {
+		maxId = 0;
 		try {
 			String url = "jdbc:mysql://localhost:3306/kosys";
 			// Connect to database
@@ -44,6 +44,9 @@ public class ToDo{
 				}
 				maxId++;
 			}
+			myConn.close();
+			myStmt.close();
+			myRs.close();
 		}
 		catch(Exception e) {
 			e.printStackTrace();

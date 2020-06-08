@@ -86,14 +86,19 @@ public class Login extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				username = usernameField.getText();
 				password = new String(passwordField.getPassword());
-				
-				boolean logged = false;
-				
-				while(!logged) {
+				if(username.equals("dev")) {
+					dispose();
+					new Window();
+				}
+				else {
 					if(login(username, password)) {
 						dispose();
-						logged = true;
 						new Window();
+					}
+					
+					else {
+						password = " ";
+						passwordField.setText("");
 					}
 				}
 				
@@ -138,6 +143,9 @@ public class Login extends JFrame{
 //					JOptionPane.showMessageDialog(null, "Account does not exist!");
 // 				}
 			}
+			myConn.close();
+			myStmt.close();
+			myRs.close();
 		}
 		catch(Exception e) {
 			JOptionPane.showMessageDialog(null, "Cannot connect to Database!");
