@@ -1,20 +1,18 @@
 package de.kosys.mainFrame;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import de.kosys.todo.ToDo;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
-import java.util.Vector;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
-import javax.swing.JLayeredPane;
 
 public class Window extends JFrame {
 	
@@ -24,6 +22,7 @@ public class Window extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel todoPanel;
+	private JPanel todoPanelInfos;
 	private JPanel userPanel;
 	private JPanel chatPanel;
 	private JPanel settingsPanel;
@@ -64,6 +63,8 @@ public class Window extends JFrame {
 		layeredPane.setBounds(240, 30, 560, 420);
 		getContentPane().add(layeredPane);
 		
+		//#####################################################################################################################################
+		
 		todoPanel = new JPanel();
 		todoPanel.setBounds(240, 30, 560, 420);
 		layeredPane.add(todoPanel);
@@ -84,13 +85,15 @@ public class Window extends JFrame {
 		layeredPane.add(settingsPanel);
 		settingsPanel.setLayout(null);
 		
+		//#####################################################################################################################################
+		
 		JButton page1 = new JButton("TODO");
 		page1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				todo.getToDoList();
 				createToDoLabels();
 				selectPage(todoPanel);
-				System.out.println(todo.getmaxID());
+//				System.out.println(todo.getmaxID());
 			}
 		});
 		page1.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -144,6 +147,7 @@ public class Window extends JFrame {
 	
 	private void selectPage(JPanel panel) {
 		getLayeredPane().remove(todoPanel);
+//		getLayeredPane().remove(todoPanelInfos);
 		getLayeredPane().remove(chatPanel);
 		getLayeredPane().remove(userPanel);	
 		getLayeredPane().remove(settingsPanel);
@@ -168,12 +172,14 @@ public class Window extends JFrame {
 		int hm = 10; // Height margin
 	
 		for(int i = 0; i < todo.getmaxID(); i++) {
-			
+//			
 			arr[i] = new JButton(todo.getTitle(i));
 			arr[i].setBounds(wm + x, hm + y, witdh, height);
 			arr[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+//					JOptionPane.showMessageDialog(null, "Title: \n	" + todo.getTitle(i) + "\n Created by: \n" + todo.getcreatedBy(i) + "\n Needs to be finish till: \n" + todo.getfinishDate(i));
 					
+//					System.out.println("GUSTAV BTN PRESSED!");
 				}
 			});
 			switch(todo.getStatus(i)) {

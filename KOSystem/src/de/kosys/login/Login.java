@@ -1,23 +1,25 @@
 package de.kosys.login;
 
 import java.awt.Color;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-//import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
-
-import de.kosys.mainFrame.Window;
-
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import java.sql.*;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import de.kosys.mainFrame.Window;
 
 public class Login extends JFrame{
 	

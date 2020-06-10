@@ -13,6 +13,8 @@ public class ToDo{
 	
 	private String[] Title = new String[16];
 	private String[] Status = new String[16];
+	private String[] createdBy = new String[16];
+	private String[] finishDate = new String[16];
 		
 	public void getToDoList() {
 		maxId = 0;
@@ -28,6 +30,8 @@ public class ToDo{
 			while(myRs.next()) {
 				id[maxId] = myRs.getInt("id");
 				Title[maxId] = myRs.getString("title");
+				createdBy[maxId] = myRs.getString("user");
+				finishDate[maxId] = myRs.getString("finishdate");
 				switch(myRs.getInt("status")) {
 				case 1:
 					Status[maxId] = "ToDo";
@@ -65,7 +69,16 @@ public class ToDo{
 	public String getTitle(int index) {
 		return Title[index];
 	}
+	
 	public String getStatus(int index) {
 		return Status[index];
+	}
+	
+	public String getcreatedBy(int index) {
+		return createdBy[index];
+	}
+	
+	public String getfinishDate(int index) {
+		return finishDate[index];
 	}
 }
